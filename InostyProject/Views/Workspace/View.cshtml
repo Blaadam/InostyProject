@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "View";
+}
+
+@model WorkspaceDataModel
+
+<h2>@Model.workspace.WorkspaceName</h2>
+<p>@Model.workspace.WorkspaceDescription</p>
+
+<hr />
+
+<p>Members: @Model.members.Count</p>
+
+<div class="sort-options">
+    <a href="?sortBy=Ascending">Sort Ascending</a> | <a href="?sortBy=Descending">Sort Descending</a>
+</div>
+
+<div class="workspaceGridContainer">
+
+    <!-- Creates a view of all the members of the Workspace -->
+    @foreach (var member in Model.members)
+    {
+        <div class="workspaceGridItem">
+            <h4>@member.AccountName</h4>
+            <p>@member.AccessLevel</p>
+
+            <button data-workspace-id="@Model.workspace.WorkspaceId" data-member-id="@member.AccountID" onclick="removeMember(this)">Remove</button>
+
+        </div>
+    }
+
+</div>
+
+@* Script for removing members *@
+<script>
+    function removeMember(button) {
+        var workspaceID = button.dataset.workspaceId;
+        var memberID = button.dataset.memberId;
+
+        console.log(workspaceID, memberID);
+
+        $.ajax({
+            url: "/Workspace/RemoveMember",
+            type: "POST",
+            data: {
+                workspaceID: workspaceID,
+                memberID: memberID
+            },
+            success: function (data) {
+                location.reload();
+            },
+            error: function (error) {
+                console.error("Error removing member:", error.responseText);
+                alert("Error removing member. Please try again.");
+            }
+        });
+    }
+</script>

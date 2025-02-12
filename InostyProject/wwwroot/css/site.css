@@ -1,22 +1,68 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+.inputDiv {
+    padding-bottom: 20px;
+}
+
+.formButton {
+    border: none
+}
+
+.formMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+/* Used for Workspace Members */
+
+.workspaceGridContainer {
+    display: grid;
+    grid-template-columns: 32.75% 32.75% 32.75%;
+    grid-gap: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.workspaceGridItem {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*text-align: center;*/
+}
+
+
+/* Workspace Sort Options */
+.sort-options a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+    .sort-options a:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }

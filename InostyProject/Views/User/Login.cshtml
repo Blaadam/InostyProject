@@ -1,0 +1,30 @@
+﻿@{
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@model User
+@Html.AntiForgeryToken();
+
+<div class="loginContainer">
+	<img src="~/images/icon.png" class="loginIcon" />
+	<h4>Welcome</h4>
+	<h6 style="padding-bottom: 10px">Please enter your details to login.</h6>
+
+	<form asp-action="Login" method="post" class="loginRegisterMenu" asp-controller="User">
+		<div class="loginInputDiv">
+			<label for="Email">Email Address:</label>
+			<input asp-for="Email" class="form-control" placeholder="Email" />
+			<span asp-validation-for="Email" class="text-danger"></span>
+		</div>
+
+		<div class="loginInputDiv">
+			<label for="Password">Password:</label>
+			<input asp-for="Password" class="form-control" placeholder="Password" />
+			<span asp-validation-for="Password" class="text-danger"></span>
+		</div>
+
+		<button type="submit" class="loginButton">Login</button>
+	</form>
+
+	<a href="/User/Register" style="margin-top: 5px" >Don't have an account? Create one!</a>
+</div>

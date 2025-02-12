@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Create a Workspace!";
+}
+
+@model Workspace
+
+<h2>Create a Workspace</h2>
+
+<form asp-action="Create" method="post" class="formMenu" asp-controller="Workspace">
+    <div class="inputDiv">
+        <label for="WorkspaceName">Workspace Name</label>
+        <input asp-for="WorkspaceName" class="form-control" placeholder="Workspace Name" />
+        <span asp-validation-for="WorkspaceName" class="text-danger"></span>
+    </div>
+
+    <div class="inputDiv">
+        <label for="WorkspaceDescription">Workspace Description:</label>
+        <input asp-for="WorkspaceDescription" class="form-control" placeholder="Description" />
+        <span asp-validation-for="WorkspaceDescription" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="formButton">Create</button>
+</form>

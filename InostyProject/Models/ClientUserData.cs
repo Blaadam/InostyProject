@@ -1,16 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InostyProject.Data
+namespace InostyProject.Models
 {
-    public class User
+    public class ClientUserData
     {
-        [Key]
-        public int AccountID { get; set; }
         [MaxLength(30)]
         public string AccountName { get; set; }
+
+        [Required]
         [MaxLength(254)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [MaxLength(30)]
-        public string Password { get; set; }
     }
 }
