@@ -2,7 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model List<Workspace>
+
+<h2>Your Workspaces</h2>
+<p>Total Workspaces: @Model.Count</p>
+<button onclick="window.location.href='/Workspace/Create'">Create Workspace</button>
+
+<hr />
+
+<table class="workspaceListTable">
+    <tr>
+        <th style="width: 25%">Name</th>
+        <th style="text-align: left">Description</th>
+    </tr>
+
+    @foreach (var workspace in Model)
+    {
+        <tr>
+            <td class="workspaceListRow">
+                <button class="workspaceNameButton" onclick="window.location.href='/Workspace/View/@workspace.WorkspaceId'">
+                    @workspace.WorkspaceName
+                </button>
+            </td>
+            <td class="workspaceListRow">
+                @workspace.WorkspaceDescription
+            </td>
+        </tr>
+    }
+</table>

@@ -66,3 +66,22 @@ body {
         text-decoration: underline;
         color: #0056b3;
     }
+
+/* Main Page Table */
+.workspaceListTable {
+    width: 100%;
+    border-collapse: separate
+}
+
+.workspaceListRow {
+    border-radius: 8px;
+    background-color: rgba(10, 10, 10, 0.1);
+    text-align: left;
+    padding: 5px;
+}
+
+.workspaceNameButton {
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+}
