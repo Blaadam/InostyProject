@@ -128,7 +128,7 @@ namespace InostyProject.Controllers
             List<MemberDataModel> membersModel = new List<MemberDataModel>();
             members.ForEach(m =>
             {
-                var account = _context.UserTable.FirstOrDefault(u => u.AccountID == m.AccountID);
+                var account = _context.UserTable.FirstOrDefault(a => a.AccountID == m.AccountID);
                 if (account != null)
                 {
                     membersModel.Add(new MemberDataModel
@@ -142,8 +142,9 @@ namespace InostyProject.Controllers
             });
 
             var sortedMemberModel = SortMembers.Sort(membersModel, sortBy ?? "Descending");
+            List<Board> boards = _context.BoardTable.Where(b => b.WorkspaceId == id).ToList();
 
-            WorkspaceDataModel workspaceModel = new WorkspaceDataModel(workspace, sortedMemberModel);
+            WorkspaceDataModel workspaceModel = new WorkspaceDataModel(workspace, sortedMemberModel, boards);
             return View(workspaceModel);
         }
 
@@ -194,5 +195,11 @@ namespace InostyProject.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public ActionResult OpenBoard(int boardID)
+        {
+            Console.WriteLine(boardID);
+            return RedirectToAction("Index", "BoardController", new { id = boardID });
+        }
     }
 }

@@ -112,7 +112,7 @@ namespace InostyProject.Controllers
             _context.SaveChanges();
 
             CookieOptions options = new CookieOptions();
-            options.Expires = DateTime.Now.AddMinutes(10);
+            options.Expires = DateTime.Now.AddHours(1);
             options.HttpOnly = true;
             options.Secure = true;
 

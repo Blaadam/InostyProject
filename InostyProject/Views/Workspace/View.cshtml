@@ -28,8 +28,25 @@
 
         </div>
     }
+</div>
+
+<hr />
+
+<p>Boards: @Model.boards.Count</p>
+<button onclick="window.location.href ='/Board/Create/@Model.workspace.WorkspaceId'"> Create Board </button>
+
+<div class="workspaceGridContainer">
+
+    <!-- Creates a view of all the boards belonging to the Workspace -->
+    @foreach (var board in Model.boards)
+    {
+        <button onclick="window.location.href = '/Board/View/@board.BoardID'" class="workspaceGridItem">
+            <h4>@board.BoardName</h4>
+        </button>
+    }
 
 </div>
+
 
 @* Script for removing members *@
 <script>

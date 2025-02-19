@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Create a Board!";
+}
+
+@model Board
+
+<h2>Create a Board</h2>
+<h6>WorkspaceID: @Model.WorkspaceId</h6>
+
+<form asp-action="Create" method="post" class="formMenu" asp-controller="Board">
+    <input type="hidden" asp-for="WorkspaceId" value="@Model.WorkspaceId" />
+
+    <div class="inputDiv">
+        <label for="BoardName">Board Name</label>
+        <input asp-for="BoardName" class="form-control" placeholder="Board Name" />
+        <span asp-validation-for="BoardName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="formButton">Create</button>
+</form>

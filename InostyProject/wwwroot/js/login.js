@@ -1,5 +1,8 @@
-﻿async function main() {
-    var response = await fetch('@Url.Action("GetCurrentUser", "User")')
+﻿const getCurrentUserURL = "/User/GetCurrentUser";
+const logoutURL = "/User/Logout";
+
+async function main() {
+    var response = await fetch(getCurrentUserURL)
     if (!response.ok) {
         return;
     }
@@ -9,7 +12,7 @@
     // Logic to handle logout
     if (user.accountName != null) {
         document.querySelector('.logout-button').addEventListener('click', async function () {
-            var response = await fetch('@Url.Action("Logout", "User")')
+            var response = await fetch(logoutURL)
 
             if (!response.ok) {
                 return;
