@@ -37,7 +37,7 @@ namespace InostyProject.Controllers
         {
             _context.BoardTable.Add(boardModel);
             _context.SaveChanges();
-            return RedirectToAction("View", "Workspace", boardModel.WorkspaceId);
+            return RedirectToAction("View", "Workspace", new { id = boardModel.WorkspaceId });
         }
 
         [HttpGet]
@@ -61,19 +61,72 @@ namespace InostyProject.Controllers
 
             if (board == null)
             {
-                return NotFound(new {message = $"BoardId ({board.BoardID}) could not be found."});
+                return NotFound(new { message = $"BoardId {id} could not be found." });
             }
 
             var workspace = _context.WorkspaceTable.FirstOrDefault(w => w.WorkspaceId == board.WorkspaceId);
             if (workspace == null)
             {
-                return NotFound(new { message = $"WorkspaceId ({board.WorkspaceId}) could not be found." });
+                return NotFound(new { message = $"WorkspaceId {board.WorkspaceId} could not be found." });
             }
+
+            var lists = _context.ListTable.Where(l => l.BoardID == board.BoardID).ToList();
 
             boardModel.board = board;
             boardModel.workspace = workspace;
+            boardModel.lists = lists;
 
-            return Json(boardModel);
+            return View(boardModel);
+        }
+
+        [HttpGet]
+        [Route("Board/CreateList/{boardId?}")]
+        public ActionResult CreateList(int boardId)
+        {
+            BoardList list = new BoardList();
+            list.BoardID = boardId;
+            return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult CreateList(BoardList list)
+        {
+            _context.ListTable.Add(list);
+            _context.SaveChanges();
+            return RedirectToAction("View", "Board", new { id = list.BoardID });
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteList(int id)
+        {
+            var list = _context.ListTable.FirstOrDefault(l => l.ListID == id);
+            if (list == null)
+            {
+                return BadRequest(new { message = $"ListId {id} could not be found." });
+            }
+
+            var boardId = list.BoardID;
+            _context.ListTable.Remove(list);
+            _context.SaveChanges();
+
+            return Ok(new {message = $"Successfully removed {list.ListName}"});
+        }
+
+        [HttpGet]
+        [Route("Board/CreateCard/{boardId?}")]
+        public ActionResult CreateCard(int boardId)
+        {
+            BoardList list = new BoardList();
+            list.BoardID = boardId;
+            return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult CreateCard(BoardList list)
+        {
+            _context.ListTable.Add(list);
+            _context.SaveChanges();
+            return RedirectToAction("View", "Board", new { id = list.BoardID });
         }
 
     }

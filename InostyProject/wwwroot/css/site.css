@@ -85,3 +85,66 @@ body {
     padding: 5px;
     border-radius: 4px;
 }
+
+/* Board Content */
+
+.topBar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 10px);
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 48px;
+    padding-left: 15px;
+    gap: 10px;
+}
+
+.topBarText {
+    height: 32px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.boardContainer {
+    display: flex;
+    justify-content: flex-start
+}
+
+.listContainer {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    height: calc(100vh - 85px);
+}
+
+.cardList {
+    flex: 0 0 auto;
+    width: 250px;
+    padding: 12px 12px 12px 12px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    height: max-content;
+}
+
+    .cardList > p {
+        padding-bottom: 5px;
+    }
+
+    .cardList > div {
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+.card {
+    flex: 0 0 auto;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    height: max-content;
+    border-radius: 8px;
+}

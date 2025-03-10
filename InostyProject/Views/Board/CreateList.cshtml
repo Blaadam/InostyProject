@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Create a List!";
+}
+
+@model BoardList
+
+<h2>Create a List</h2>
+<h6>BoardID: @Model.BoardID</h6>
+
+<form asp-action="CreateList" method="post" class="formMenu" asp-controller="Board">
+    <input type="hidden" asp-for="BoardID" value="@Model.BoardID" />
+
+    <div class="inputDiv">
+        <label for="ListName">List Name</label>
+        <input asp-for="ListName" class="form-control" placeholder="List Name" />
+        <span asp-validation-for="ListName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="formButton">Create</button>
+</form>

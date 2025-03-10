@@ -2,4 +2,69 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewBag.Title = @Model.board.BoardName;
+    Layout = "~/Views/Shared/_BoardLayout.cshtml";
 }
+
+@model BoardViewModel
+
+<div class="topBar">
+    <p class="topBarText">@Model.board.BoardName</p>
+    <p class="topBarText">></p>
+    <p class="topBarText">@Model.workspace.WorkspaceName</p>
+</div>
+
+<div class="boardContainer">
+    <div class="listContainer">
+        @foreach (var list in Model.lists)
+        {
+            <div class="cardList">
+                <div>
+                    <h5>@list.ListName</h5>
+                    <button class="formButton"
+                            data-list-id="@list.ListID" data-list-name="@list.ListName"
+                            onclick="deleteList(this)">
+                        🗑️
+                    </button>
+                </div>
+                <hr>
+                <div>
+                    <button class="card">
+                        <h6>Test Card</h6>
+                    </button>
+                </div>
+            </div>
+        }
+
+        <button class="cardList" onclick="window.location.href='/Board/CreateList/@Model.board.BoardID'">
+            Create a new list
+        </button>
+
+    </div>
+</div>
+
+<script>
+    function deleteList(button) {
+        var listId = button.dataset.listId;
+        var listName = button.dataset.listName;
+        if (!confirm("Are you sure you want to delete "+listName+"?")){
+            return;
+        }
+
+        $.ajax({
+            url: "/Board/DeleteList",
+            type: "DELETE",
+            data: {
+                id: listId,
+            },
+            success: function (data) {
+                location.reload();
+            },
+            error: function (error) {
+                console.error("Error removing list:", error.responseText);
+                alert("Error removing list." + error.responseText);
+            }
+        });
+
+    }
+</script>

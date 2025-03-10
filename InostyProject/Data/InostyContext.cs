@@ -13,5 +13,7 @@ namespace InostyApp.Data
         public DbSet<Workspace> WorkspaceTable { get; set; }
         public DbSet<MemberLink> MemberTable { get; set; }
         public DbSet<Board> BoardTable { get; set; }
+        public DbSet<BoardList> ListTable { get; set; }
+        public DbSet<Card> CardTable { get; set; }
     }
 }
